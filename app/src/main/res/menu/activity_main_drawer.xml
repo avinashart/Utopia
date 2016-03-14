@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/topPanel"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/events"
+            android:icon="@drawable/events"
+            android:title="Events" />
+        <item
+            android:id="@+id/team_info"
+            android:icon="@drawable/team"
+            android:title="Team Info" />
+        <item
+            android:id="@+id/gallery"
+            android:icon="@drawable/gallery"
+            android:title="Gallery" />
+        <item
+            android:id="@+id/mobile_event"
+            android:icon="@drawable/mobile_events"
+            android:title="Mobile Event" />
+        <item
+            android:id="@+id/t_shirt"
+            android:icon="@drawable/tshirt"
+            android:title="T-Shirt" />
+        <item
+            android:id="@+id/event_coordinator"
+            android:icon="@drawable/coordinator"
+            android:title="Event Coordinators" />
+    </group>
+
+<group android:id="@+id/bottomPanel"
+    android:checkableBehavior="single">
+
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/account"
+        android:title="Account Details" />
+
+    <item
+        android:id="@+id/feedback"
+        android:icon="@drawable/feedback"
+        android:title="Provide Feedback" />
+
+
+</group>
+
+</menu>
