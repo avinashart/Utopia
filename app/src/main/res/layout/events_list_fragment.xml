@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <pttextview.widget.PTTextView
+        android:id="@+id/ccText"
+        android:padding="12dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="EVENTS LIST - UTOPIA 2016"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        app:textWeight="bold"
+        app:typeface="pt_serif_bold_italic"/>
+
+
+
+    <ListView
+        android:layout_below="@+id/ccText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/all_events_list"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

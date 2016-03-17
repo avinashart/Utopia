@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/content_main"
+    android:id="@+id/main"
     android:background="#dcedc8"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.justmailtoavi.avinashk.utopia.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    >
+
+    <com.daimajia.slider.library.SliderLayout
+        android:layout_marginTop="40dp"
+        android:id="@+id/mainActivitySlider"
+        android:layout_width="match_parent"
+        android:background="#7cb342"
+        android:layout_height="400dp"
+        />
+
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.justmailtoavi.avinashk.utopia;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
+import java.util.HashMap;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,13 +42,43 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar mysnack= Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG);
-                View myview = mysnack.getView();
-                TextView tv = (TextView) myview.findViewById(android.support.design.R.id.snackbar_text);
-                tv.setTextColor(Color.parseColor("#7cb342"));
-                mysnack.show();
+                Fragment fragment;
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                fragment = new gallery_fragment();
+                ft.replace(R.id.main,fragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+
             }
         });
+
+
+        SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
+
+        final HashMap<String,Integer> file_maps = new HashMap<>();
+        file_maps.put("Vijayanagar Wikings",R.drawable.vijayanagara);
+
+        for(String name : file_maps.keySet()){
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+
+            //add your extra information
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("extra",name);
+
+            mDemoSlider.addSlider(textSliderView);
+        }
+
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(7000);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,7 +101,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -72,7 +109,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.rules) {
             return true;
         }
 
@@ -87,26 +124,52 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
         int id = item.getItemId();
-        if (id == R.id.events) {
-
+        if (id == R.id.events_list) {
+            fragment = new events_list_fragment();
+            ft.replace(R.id.main,fragment,null);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.team_info) {
-
+            fragment = new team_info_fragment();
+            ft.replace(R.id.main,fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.gallery) {
-
+            fragment = new gallery_fragment();
+            ft.replace(R.id.main,fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.event_coordinator) {
-
+            fragment = new event_coordinator_fragment();
+            ft.replace(R.id.main,fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.feedback) {
             Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "justmailtoavi@gmail.com"));
             intent.putExtra(Intent.EXTRA_SUBJECT, "Utopia Feedback System");
             startActivity(intent);
         } else if (id == R.id.t_shirt) {
             fragment = new t_shirt_fragment();
-            ft.replace(R.id.content_main,fragment);
+            ft.replace(R.id.main,fragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
-        }else if (id == R.id.mobile_event) {
-
+        }else if( id == R.id.core_team){
+            fragment = new core_team_fragment();
+            ft.replace(R.id.main,fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
+        }else if( id == R.id.about){
+            fragment = new about_developers();
+            ft.replace(R.id.main,fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <pttextview.widget.PTTextView
+
+        android:padding="12dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:text="EVENT"
+        android:layout_height="wrap_content"
+        app:textWeight="bold"
+        app:typeface="pt_serif_bold_italic"/>
+
+    <pttextview.widget.PTTextView
+        android:padding="12dp"
+        android:paddingStart="150dp"
+        android:id="@+id/event_eventName"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:text="Example"
+        android:layout_height="wrap_content"
+        app:textWeight="bold"
+        app:typeface="pt_serif_bold_italic"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_eventName"
+        android:text="COORDINATOR"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="150dp"
+        android:id="@+id/event_coordinatorName"
+        android:layout_below="@+id/event_eventName"
+        android:text="Coordinator"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_coordinatorName"
+        android:text="ENTRIES"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="150dp"
+        android:id="@+id/event_numberOfEntries"
+        android:layout_below="@+id/event_coordinatorName"
+        android:text="Number of_example"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_numberOfEntries"
+        android:text="VENUE"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="150dp"
+        android:id="@+id/event_venue"
+        android:layout_below="@+id/event_numberOfEntries"
+        android:text="RNSIT Campus"
+        />
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

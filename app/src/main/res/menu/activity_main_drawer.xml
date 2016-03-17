@@ -5,9 +5,9 @@
         android:id="@+id/topPanel"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/events"
+            android:id="@+id/events_list"
             android:icon="@drawable/events"
-            android:title="Events" />
+            android:title="Events List" />
         <item
             android:id="@+id/team_info"
             android:icon="@drawable/team"
@@ -17,10 +17,6 @@
             android:icon="@drawable/gallery"
             android:title="Gallery" />
         <item
-            android:id="@+id/mobile_event"
-            android:icon="@drawable/mobile_events"
-            android:title="Mobile Event" />
-        <item
             android:id="@+id/t_shirt"
             android:icon="@drawable/tshirt"
             android:title="T-Shirt" />
@@ -28,22 +24,26 @@
             android:id="@+id/event_coordinator"
             android:icon="@drawable/coordinator"
             android:title="Event Coordinators" />
+        <item
+            android:id="@+id/core_team"
+            android:icon="@drawable/core_team"
+            android:title="Core Team" />
+
+
     </group>
 
 <group android:id="@+id/bottomPanel"
     android:checkableBehavior="single">
-
-
-    <item
-        android:id="@+id/account"
-        android:icon="@drawable/account"
-        android:title="Account Details" />
 
     <item
         android:id="@+id/feedback"
         android:icon="@drawable/feedback"
         android:title="Provide Feedback" />
 
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/account"
+        android:title="About Dev" />
 
 </group>
 
