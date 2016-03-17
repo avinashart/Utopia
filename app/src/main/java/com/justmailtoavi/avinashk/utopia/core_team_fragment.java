@@ -45,13 +45,14 @@ public class core_team_fragment extends Fragment {
         core_list.add(new core_team_adapter("Abhishek D Naik", "9482426466"));
         core_list.add(new core_team_adapter("SreeHari Chilukuri", "9742059832"));
         core_list.add(new core_team_adapter("Zain Shapoo", "9972103763"));
-        core_list.add(new core_team_adapter("Vishnu Teja", "9000696843"));
+        core_list.add(new core_team_adapter("Vishnu Teja", "9000696834"));
         core_list.add(new core_team_adapter("Ganga Chidanand", "8105456419"));
         core_list.add(new core_team_adapter("Shilpi Jaiswal", "8147664370"));
         core_list.add(new core_team_adapter("Archi Choudhary ", "9986460285"));
         core_list.add(new core_team_adapter("Richa Jain ", "9591609502"));
         core_list.add(new core_team_adapter("Abhishek Sangwan", "8892053132"));
-
+        core_list.add(new core_team_adapter("T Supriya", "9535760313"));
+        core_list.add(new core_team_adapter("Snigdha C", "9019955611"));
 
         core_list.add(new core_team_adapter("Pankaj Shaw", "7406284638"));
         core_list.add(new core_team_adapter("Nikhil ", "9164836350"));
@@ -62,6 +63,7 @@ public class core_team_fragment extends Fragment {
         core_list.add(new core_team_adapter("Sahana Lokare", "9036073108"));
         core_list.add(new core_team_adapter("Ashoka", "8105463006"));
 
+        //Payal and Tejeswini Remaining
     }
 
     private void displayList(View view) {

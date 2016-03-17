@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+            fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment;
@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity
         SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
 
         final HashMap<String,Integer> file_maps = new HashMap<>();
-        file_maps.put("Vijayanagar Wikings",R.drawable.vijayanagara);
+        file_maps.put("Vijayanagar Wikings",R.drawable.vijaynagar);
+        file_maps.put("Hoysala Pirates",R.drawable.hoysala);
+        file_maps.put("Kalinga Kings",R.drawable.kalinga);
+        file_maps.put("Maurya Warriors",R.drawable.maurya);
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);

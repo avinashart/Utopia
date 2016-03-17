@@ -32,4 +32,5 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/fab"
         />
+
 </android.support.design.widget.CoordinatorLayout>
