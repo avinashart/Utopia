@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.github.olegosipenko:pttextview:1.0.0'
 }
 dependencies {
@@ -36,4 +37,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
 }

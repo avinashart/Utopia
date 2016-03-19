@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.justmailtoavi.avinashk.utopia.about_dev"
+    tools:showIn="@layout/activity_about_dev">
+
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/avi"
+            app:civ_border_color="#8b8686"
+            app:civ_border_width="4dp"
+            app:civ_shadow="true"
+            app:civ_shadow_radius="10"
+            app:civ_shadow_color="#aeea00"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <pttextview.widget.PTTextView
+                android:padding="6dp"
+                android:layout_marginTop="30dp"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:text="Avinash K"
+                android:textColor="#000000"
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+            <pttextview.widget.PTTextView
+                android:padding="6dp"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="ISE Department"
+                android:textColor="#000000"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <pttextview.widget.PTTextView
+        android:padding="12dp"
+        android:layout_below="@+id/l1"
+        android:id="@+id/mail"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:textSize="15sp"
+        android:text="Mail_id  :  justmailtoavi@gmail.com"
+        android:textColor="#000000"
+        android:layout_height="wrap_content"
+        />
+    <pttextview.widget.PTTextView
+        android:padding="12dp"
+        android:layout_below="@+id/mail"
+        android:id="@+id/phone"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:textSize="15sp"
+        android:text="Contact : 9880430068"
+        android:textColor="#000000"
+        android:layout_height="wrap_content"
+        />
+
+
+    <TextView
+        android:layout_below="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:id="@+id/divider"
+        />
+
+    <TextView
+        android:paddingTop="20dp"
+        android:layout_below="@id/divider"
+        android:text="Support:   (Data gathering/ Content Writing)"
+        android:id="@+id/support"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_below="@+id/support"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:paddingTop="20dp"
+            android:layout_width="wrap_content"
+            android:text="Suraj Raghuram TJ 4th Semester ISE Dept"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:paddingTop="20dp"
+            android:layout_width="wrap_content"
+            android:text="Abhishek SK   4th Semester ECE Dept"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

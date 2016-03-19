@@ -1,14 +1,12 @@
 package com.justmailtoavi.avinashk.utopia;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,14 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-
-import java.util.HashMap;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
@@ -53,35 +44,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        Fragment fragment;
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        fragment = new container();
+        ft.replace(R.id.main, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
 
-        SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
-
-        final HashMap<String,Integer> file_maps = new HashMap<>();
-        file_maps.put("Vijayanagar Wikings",R.drawable.vijaynagar);
-        file_maps.put("Hoysala Pirates",R.drawable.hoysala);
-        file_maps.put("Kalinga Kings",R.drawable.kalinga);
-        file_maps.put("Maurya Warriors",R.drawable.maurya);
-
-        for(String name : file_maps.keySet()){
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
-
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra",name);
-
-            mDemoSlider.addSlider(textSliderView);
-        }
-
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(7000);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -91,15 +61,26 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            return;
         }
+        doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 1200);
     }
 
     @Override
@@ -114,6 +95,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.rules) {
             return true;
+        }else if (id == R.id.about_dev){
+            Intent intent = new Intent(MainActivity.this,about_dev.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -134,11 +118,8 @@ public class MainActivity extends AppCompatActivity
             ft.addToBackStack(null);
             ft.commit();
         } else if (id == R.id.team_info) {
-            fragment = new team_info_fragment();
-            ft.replace(R.id.main,fragment);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
+            Intent intent = new Intent(MainActivity.this,teams_info.class);
+            startActivity(intent);
         } else if (id == R.id.gallery) {
             fragment = new gallery_fragment();
             ft.replace(R.id.main,fragment);
@@ -167,12 +148,9 @@ public class MainActivity extends AppCompatActivity
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
-        }else if( id == R.id.about){
-            fragment = new about_developers();
-            ft.replace(R.id.main,fragment);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
+        }else if(id == R.id.home){
+            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

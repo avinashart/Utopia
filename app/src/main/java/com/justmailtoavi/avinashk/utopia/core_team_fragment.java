@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import adapter.core_team_adapter;
@@ -42,8 +44,13 @@ public class core_team_fragment extends Fragment {
 
         core_list.add(new core_team_adapter("Gowtham Kumar", "7406059007"));
         core_list.add(new core_team_adapter("Karthik Rao", "8904663168"));
+        core_list.add(new core_team_adapter("Sahana Lokare", "9036073108"));
         core_list.add(new core_team_adapter("Abhishek D Naik", "9482426466"));
         core_list.add(new core_team_adapter("SreeHari Chilukuri", "9742059832"));
+        core_list.add(new core_team_adapter("Pooja Niloor ", "9741597224"));
+        core_list.add(new core_team_adapter("T Supriya", "9535760313"));
+        core_list.add(new core_team_adapter("Tejaswini","7259154719"));
+
         core_list.add(new core_team_adapter("Zain Shapoo", "9972103763"));
         core_list.add(new core_team_adapter("Vishnu Teja", "9000696834"));
         core_list.add(new core_team_adapter("Ganga Chidanand", "8105456419"));
@@ -51,7 +58,6 @@ public class core_team_fragment extends Fragment {
         core_list.add(new core_team_adapter("Archi Choudhary ", "9986460285"));
         core_list.add(new core_team_adapter("Richa Jain ", "9591609502"));
         core_list.add(new core_team_adapter("Abhishek Sangwan", "8892053132"));
-        core_list.add(new core_team_adapter("T Supriya", "9535760313"));
         core_list.add(new core_team_adapter("Snigdha C", "9019955611"));
 
         core_list.add(new core_team_adapter("Pankaj Shaw", "7406284638"));
@@ -59,16 +65,20 @@ public class core_team_fragment extends Fragment {
         core_list.add(new core_team_adapter("Akshay Sharma", "9591536760"));
         core_list.add(new core_team_adapter("Ashwini", "9591384197"));
         core_list.add(new core_team_adapter("Kaushik ", "8792384417"));
-        core_list.add(new core_team_adapter("Pooja Niloor ", "9741597224"));
-        core_list.add(new core_team_adapter("Sahana Lokare", "9036073108"));
         core_list.add(new core_team_adapter("Ashoka", "8105463006"));
 
-        //Payal and Tejeswini Remaining
+        core_list.add(new core_team_adapter("Aditi","9590741823"));
+        core_list.add(new core_team_adapter("Shashi","8050519950"));
+
+        core_list.add(new core_team_adapter("Alok Kumar","9663880829"));
+        core_list.add(new core_team_adapter("Payal","990079758"));
+
     }
 
     private void displayList(View view) {
         ArrayAdapter<core_team_adapter> adapter = new myCoreTeamAdapter();
         ListView list = (ListView)view.findViewById(R.id.core_team_list);
+
         list.setAdapter(adapter);
     }
 
@@ -85,7 +95,7 @@ public class core_team_fragment extends Fragment {
                 itemView = getActivity().getLayoutInflater().inflate(R.layout.core_team_fragment_item,parent,false);
             }
 
-            core_team_adapter current = core_list.get(position);
+            final core_team_adapter current = core_list.get(position);
 
 
             TextView text_name = (TextView) itemView.findViewById(R.id.core_name_item);

@@ -6,16 +6,16 @@
 
     <pttextview.widget.PTTextView
         android:id="@+id/pptext"
-        android:padding="12dp"
+        android:padding="6dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
+        android:textSize="20sp"
         android:text="UTOPIA CORE TEAM 2016"
-        android:textColor="@color/colorPrimaryDark"
-
+        android:textColor="#000000"
         android:layout_height="wrap_content"
         app:textWeight="bold"
         app:typeface="pt_serif_bold_italic"/>

@@ -12,18 +12,22 @@
           >
           <TextView
               android:padding="10dp"
+              android:textSize="15sp"
+              android:textStyle="bold"
               android:layout_width="150dp"
               android:layout_height="wrap_content"
               android:text="Name"
-              android:textColor="#1b5e20"
+              android:textColor="#000000"
               android:id="@+id/core_name_item"
               />
           <TextView
               android:padding="10dp"
+              android:textStyle="bold"
+              android:textSize="15sp"
               android:layout_marginStart="30dp"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textColor="#1b5e20"
+              android:textColor="#000000"
               android:text="Number"
               android:id="@+id/core_number_item"
               />

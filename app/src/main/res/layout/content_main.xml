@@ -8,28 +8,10 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main"
-    android:background="@drawable/b2"
     tools:context=".MainComponents.MainActivity"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_above="@+id/mainActivitySlider"
-        android:background="@color/colorPrimaryDark"
-        />
-    <com.daimajia.slider.library.SliderLayout
-        android:layout_centerInParent="true"
-        android:id="@+id/mainActivitySlider"
-        android:layout_width="match_parent"
-        android:background="#7cb342"
-        android:layout_height="350dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_below="@+id/mainActivitySlider"
-        />
+
+
 
 </RelativeLayout>

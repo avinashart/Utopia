@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/b3"
+    android:background="@drawable/b2"
     >
 
+
     <TextView
+        android:id="@+id/d1"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_above="@+id/slider"
+        android:layout_above="@+id/mainActivitySlider"
         android:background="@color/colorPrimaryDark"
         />
     <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider"
         android:layout_centerInParent="true"
+        android:id="@+id/mainActivitySlider"
         android:layout_width="match_parent"
         android:background="#7cb342"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         />
     <TextView
+        android:id="@+id/d2"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_below="@+id/slider"
         android:background="@color/colorPrimaryDark"
+        android:layout_below="@+id/mainActivitySlider"
         />
-
 
 </RelativeLayout>

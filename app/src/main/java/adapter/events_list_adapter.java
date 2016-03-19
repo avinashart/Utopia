@@ -3,26 +3,19 @@ package adapter;
 
 public class events_list_adapter {
 
-    String day,eventName,coordinator,numberOfEntries,venue,message;
+    String eventName,coordinator;
+    int day;
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
-    public events_list_adapter(String day, String eventName, String coordinator, String numberOfEntries, String venue,String message) {
+    public events_list_adapter(int day, String eventName, String coordinator) {
         this.day = day;
         this.eventName = eventName;
         this.coordinator = coordinator;
-        this.numberOfEntries = numberOfEntries;
-        this.venue = venue;
-        this.message = message;
+
     }
 
-    public String getMessage() {
-        return message;
-    }
 
-    public void setDay(String day) {
+    public void setDay(int day) {
         this.day = day;
     }
 
@@ -34,15 +27,9 @@ public class events_list_adapter {
         this.coordinator = coordinator;
     }
 
-    public void setNumberOfEntries(String numberOfEntries) {
-        this.numberOfEntries = numberOfEntries;
-    }
 
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
@@ -54,11 +41,5 @@ public class events_list_adapter {
         return coordinator;
     }
 
-    public String getNumberOfEntries() {
-        return numberOfEntries;
-    }
 
-    public String getVenue() {
-        return venue;
-    }
 }
