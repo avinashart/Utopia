@@ -2,12 +2,12 @@ package com.justmailtoavi.avinashk.utopia;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -46,10 +47,10 @@ public class events_list_fragment extends Fragment {
     ListView list;
 
     ArrayAdapter<events_list_adapter> adapter;
-
     static int serverVersion, localVersion;
     ProgressBar progressBar;
     View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,12 +70,31 @@ public class events_list_fragment extends Fragment {
             Toast.makeText(getActivity(),"No Internet Connection!",Toast.LENGTH_SHORT).show();
             loadJsonFile();
         }
-
+        handleClicks();
 
         return view;
     }
 
+    private void handleClicks() {
 
+        ListView list = (ListView)view.findViewById(R.id.all_events_list1);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                events_list_adapter click = event_list.get(position);
+                String message = click.getCoordinator();
+
+                Toast.makeText(getActivity(),"Contact "+message+" for any Queries",Toast.LENGTH_SHORT).show();
+                Fragment fragment;
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                fragment = new event_coordinator_fragment();
+                ft.replace(R.id.main, fragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+    }
 
     private void displayList(View view) {
         adapter = new myEventListAdapter();
@@ -145,8 +165,8 @@ public class events_list_fragment extends Fragment {
                     JSONArray newsArray = parent.getJSONArray("event_list");
                     for (int i = 0; i < newsArray.length(); i++) {
                         JSONObject child = newsArray.getJSONObject(i);
-                        event_list.add(new events_list_adapter(child.getInt("event_day"),
-                                child.getString("event_name"), child.getString("event_coordinator")));
+                        event_list.add(new events_list_adapter(
+                                child.getString("event_name"), child.getString("event_coordinator"),child.getInt("event_day")));
 
                     }
                     displayList(view);
@@ -154,61 +174,20 @@ public class events_list_fragment extends Fragment {
                     e.printStackTrace();
                 }
         }else {
-            //display demo values
-            event_list.add(new events_list_adapter(1,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(1,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(1,"Test1","agent 1"));
 
 
-            event_list.add(new events_list_adapter(2,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(2,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(2,"Test1","agent 1"));
+            event_list.add(new events_list_adapter("Test1","agent 1",1));
+            event_list.add(new events_list_adapter("Test1","agent 1",2));
+            event_list.add(new events_list_adapter("Test1","agent 1",3));
 
+            event_list.add(new events_list_adapter("Test1","agent 1",3));
+            event_list.add(new events_list_adapter("Test1","agent 1",2));
+            event_list.add(new events_list_adapter("Test1","agent 1",2));
 
+            event_list.add(new events_list_adapter("Test1","agent 1",1));
+            event_list.add(new events_list_adapter("Test1","agent 1",1));
+            event_list.add(new events_list_adapter("Test1","agent 1",1));
 
-            event_list.add(new events_list_adapter(3,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(3,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(3,"Test1","agent 1"));
-
-
-
-            event_list.add(new events_list_adapter(4,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(4,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(4,"Test1","agent 1"));
-
-
-
-            event_list.add(new events_list_adapter(5,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(5,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(5,"Test1","agent 1"));
-
-
-
-            event_list.add(new events_list_adapter(6,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(6,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(6,"Test1","agent 1"));
-
-
-
-            event_list.add(new events_list_adapter(7,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(7,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(7,"Test1","agent 1"));
-
-
-
-            event_list.add(new events_list_adapter(8,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(8,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(8,"Test1","agent 1"));
-
-
-
-            event_list.add(new events_list_adapter(9,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(9,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(9,"Test1","agent 1"));
-
-            event_list.add(new events_list_adapter(10,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(10,"Test1","agent 1"));
-            event_list.add(new events_list_adapter(10,"Test1","agent 1"));
 
             displayList(view);
 
@@ -240,10 +219,11 @@ public class events_list_fragment extends Fragment {
             return null;
         }
 
+
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONObject news_version = parent.getJSONObject("event_version");
@@ -258,10 +238,12 @@ public class events_list_fragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (localVersion != serverVersion)
+            if (localVersion != serverVersion){
                 new eventFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/events.json");
+                Toast.makeText(getActivity(),"Event List needs to be Updated, Swipe down to refresh",Toast.LENGTH_SHORT).show();
+            }
             else
-                Toast.makeText(getActivity(),"Events List Updated!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Events List is up to date!",Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -276,6 +258,7 @@ public class events_list_fragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -292,33 +275,9 @@ public class events_list_fragment extends Fragment {
                 }
                 String str = builder.toString();
                 saveJsonFile(str);
-
-
-                //Json Parsing start
-                JSONObject parent = new JSONObject(str);
-                JSONArray newsArray = parent.getJSONArray("event_list");
-                for (int i = 0; i < newsArray.length(); i++) {
-                    JSONObject child = newsArray.getJSONObject(i);
-                    event_list.add(new events_list_adapter(child.getInt("event_day"),
-                            child.getString("event_name"), child.getString("event_coordinator")));
-                }
-                displayList(view);
-                return null;
-
-
-            } catch (IOException | JSONException e) {
+                return str;
+            } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
             return null;
         }
@@ -326,7 +285,22 @@ public class events_list_fragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            try {
+                JSONObject parent = new JSONObject(s);
+                JSONArray eventJson = parent.getJSONArray("event_list");
+
+                for (int i = 0;i<eventJson.length();i++){
+                    JSONObject child = eventJson.getJSONObject(i);
+                    event_list.add(new events_list_adapter(child.getString("event_name"),child.getString("event_coordinator"),child.getInt("event_day")));
+                }
+                displayList(view);
+                progressBar.setVisibility(View.GONE);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
+
     }
 
 

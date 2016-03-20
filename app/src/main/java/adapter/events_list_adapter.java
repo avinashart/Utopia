@@ -7,7 +7,7 @@ public class events_list_adapter {
     int day;
 
 
-    public events_list_adapter(int day, String eventName, String coordinator) {
+    public events_list_adapter(String eventName, String coordinator,int day) {
         this.day = day;
         this.eventName = eventName;
         this.coordinator = coordinator;

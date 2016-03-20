@@ -1,11 +1,11 @@
 package com.justmailtoavi.avinashk.utopia;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -14,16 +14,25 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import java.util.HashMap;
 
+public class t_shirt extends AppCompatActivity {
 
-public class t_shirt_fragment extends Fragment {
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.t_shirt_fragment,container,false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_t_shirt);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(t_shirt.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        SliderLayout mDemoSlider = (SliderLayout) view.findViewById(R.id.slider);
+        SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.slide2);
 
         final HashMap<String,Integer> file_maps = new HashMap<>();
         file_maps.put("Upotia Men's T-Shirt",R.drawable.front_boy);
@@ -33,7 +42,7 @@ public class t_shirt_fragment extends Fragment {
 
 
         for(String name : file_maps.keySet()){
-            TextSliderView textSliderView = new TextSliderView(getActivity());
+            TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
                     .description(name)
@@ -52,6 +61,6 @@ public class t_shirt_fragment extends Fragment {
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(7000);
-        return view;
     }
+
 }

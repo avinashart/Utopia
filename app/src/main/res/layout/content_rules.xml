@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.justmailtoavi.avinashk.utopia.rules"
+    tools:showIn="@layout/activity_rules">
+
+
+    <pttextview.widget.PTTextView
+        android:id="@+id/rules_regulations"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:text="RULES AND REGULATIONS"
+        android:layout_height="wrap_content"
+        app:textWeight="bold"
+        />
+<ScrollView
+    android:layout_below="@+id/rules_regulations"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:paddingBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:id="@+id/rule1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="All participants must be present 5 minutes before the event starts and must register their names/ team names (if nescassary). "
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule1"
+            android:id="@+id/rule2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="Prerequisites for the event participation must be brought by the participants unless mentioned, will be provided. "
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule2"
+            android:id="@+id/rule3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="All the participants must be aware of the event rules before participating."
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule3"
+            android:id="@+id/rule4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="No OUTSIDERS will be entertained, Coordinators will have the complete authority to dismiss a group in in case found so."
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule4"
+            android:id="@+id/rule5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="Use of electronic gagets during the event may lead to disqualification (Terms and Conditions apply)."
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule5"
+            android:id="@+id/rule6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="Coordinaters have the right to dismiss any participant if in case found Voilating the rules."
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule6"
+            android:id="@+id/rule7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="Coordinators decision shall be FINAL. And any severe arguments with the coordinators may lead to team-points deduction."
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_below="@+id/rule7"
+            android:id="@+id/rule8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:text="•"/>
+            <pttextview.widget.PTTextView
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="Hostel ID Cards must be produced on demand of the Coordinators. Misbehaving with the coordinators or with other team members shall not be Entertained. "
+                android:layout_height="wrap_content"
+                app:textWeight="bold"
+                />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>
+
+
+
+
+
+
+
+</RelativeLayout>

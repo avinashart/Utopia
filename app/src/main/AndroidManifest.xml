@@ -38,6 +38,14 @@
         <activity
             android:name=".teams_info"
             android:label="@string/title_activity_teams_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".t_shirt"
+            android:label="@string/title_activity_t_shirt"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".rules"
+            android:label="@string/title_activity_rules"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

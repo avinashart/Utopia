@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
         if (id == R.id.rules) {
+            Intent intent = new Intent(MainActivity.this,rules.class);
+            startActivity(intent);
             return true;
         }else if (id == R.id.about_dev){
             Intent intent = new Intent(MainActivity.this,about_dev.class);
@@ -137,11 +139,10 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(Intent.EXTRA_SUBJECT, "Utopia Feedback System");
             startActivity(intent);
         } else if (id == R.id.t_shirt) {
-            fragment = new t_shirt_fragment();
-            ft.replace(R.id.main,fragment);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
+
+            Intent intent = new Intent(MainActivity.this,t_shirt.class);
+            startActivity(intent);
+
         }else if( id == R.id.core_team){
             fragment = new core_team_fragment();
             ft.replace(R.id.main,fragment);
