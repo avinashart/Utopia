@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/b4"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.justmailtoavi.avinashk.utopia.winner_list"
+    tools:showIn="@layout/activity_winner_list"
+    android:background="@drawable/b6"
     >
 
     <pttextview.widget.PTTextView
-        android:id="@+id/ccText"
+        android:id="@+id/w"
         android:padding="6dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,23 +20,34 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
-        app:textWeight="bold"
-        android:text="EVENTS LIST - UTOPIA 2016"
+        android:text="WINNERS LIST"
+        android:textColor="#000000"
         android:layout_height="wrap_content"
+        app:textWeight="bold"
         app:typeface="pt_serif_bold_italic"/>
-
 
     <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ccText"
-        android:id="@+id/main_swipe">
+        android:layout_below="@+id/w"
+        android:id="@+id/main_swipe2">
+
     <ListView
+        android:padding="10dp"
+        android:layout_below="@+id/w"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/all_events_list1"
+        android:id="@+id/winner_list"
         android:layout_centerHorizontal="true" />
 
     </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

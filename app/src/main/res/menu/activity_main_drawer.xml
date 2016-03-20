@@ -5,22 +5,17 @@
         android:id="@+id/topPanel"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/home"
-            android:icon="@drawable/home"
-            android:title="Home" />
-
-        <item
             android:id="@+id/events_list"
             android:icon="@drawable/events"
             android:title="Events List" />
         <item
             android:id="@+id/team_info"
             android:icon="@drawable/team"
-            android:title="Team Info" />
+            android:title="About Teams" />
         <item
-            android:id="@+id/gallery"
-            android:icon="@drawable/gallery"
-            android:title="Gallery" />
+            android:id="@+id/winner"
+            android:icon="@drawable/winner"
+            android:title="Event Winners" />
         <item
             android:id="@+id/t_shirt"
             android:icon="@drawable/tshirt"

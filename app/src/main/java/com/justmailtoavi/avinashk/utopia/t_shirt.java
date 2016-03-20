@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -23,6 +24,12 @@ public class t_shirt extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,11 +42,8 @@ public class t_shirt extends AppCompatActivity {
         SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.slide2);
 
         final HashMap<String,Integer> file_maps = new HashMap<>();
-        file_maps.put("Upotia Men's T-Shirt",R.drawable.front_boy);
-        file_maps.put("Upotia Women's T-Shirt   ",R.drawable.front_girl);
-        file_maps.put("Upotia Men's T-Shirt ",R.drawable.rear_boy);
-        file_maps.put("Upotia Women's T-Shirt  ",R.drawable.rear_girl);
-
+        file_maps.put("Upotia T-Shirt FrontView",R.drawable.shirt2);
+        file_maps.put("Upotia T-Shirt RearView ",R.drawable.backside);
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);
@@ -63,6 +67,15 @@ public class t_shirt extends AppCompatActivity {
         mDemoSlider.setDuration(7000);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(t_shirt.this,MainActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onBackPressed() {

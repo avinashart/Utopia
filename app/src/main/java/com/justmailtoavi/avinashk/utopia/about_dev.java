@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 public class about_dev extends AppCompatActivity {
@@ -18,6 +19,13 @@ public class about_dev extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabd);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +35,16 @@ public class about_dev extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(about_dev.this,MainActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void dev_click(View view){
@@ -50,4 +68,10 @@ public class about_dev extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(about_dev.this,MainActivity.class);
+        startActivity(intent);
+    }
 }

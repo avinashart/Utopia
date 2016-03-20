@@ -1,21 +1,21 @@
 package com.justmailtoavi.avinashk.utopia;
 
 import android.Manifest;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,122 +37,72 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.events_list_adapter;
+import adapter.winner_adapter;
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
-public class events_list_fragment extends Fragment {
+
+public class winner_list extends AppCompatActivity {
 
 
-    private List<events_list_adapter> event_list = new ArrayList<>();
-
-
-
+    private List<winner_adapter> winner_adapterList = new ArrayList<>();
     static int serverVersion, localVersion;
-    View view;
+
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.events_list_fragment,container,false);
-        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_winner_list);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe2);
+
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(winner_list.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         //Ask for permissions Android M
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
         loadJsonFile();
-
-        handleClicks();
-
-        Toast.makeText(getActivity(),"Swipe down to refresh contents..", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Swipe down to refresh contents..", Toast.LENGTH_SHORT).show();
 
 
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mWaveSwipeRefreshLayout.setRefreshing(true);
-                if (isNetworkConnected()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("event_version", Context.MODE_PRIVATE);
+                if(isNetworkConnected()){
+                    SharedPreferences preferences = getSharedPreferences("winner_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
-                    new EventVersionFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/events_version.json");
-                } else {
-                    Toast.makeText(getActivity(),"No Internet Connection!",Toast.LENGTH_SHORT).show();
+                    new WinnerVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/winner_version.json");
+                }else {
+                    Toast.makeText(getApplicationContext(),"No Internet Connection!", Toast.LENGTH_SHORT).show();
                     mWaveSwipeRefreshLayout.setRefreshing(false);
                 }
 
             }
         });
 
-
-        return view;
-    }
-
-
-    private void handleClicks() {
-
-        ListView list = (ListView)view.findViewById(R.id.all_events_list1);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                events_list_adapter click = event_list.get(position);
-                String message = click.getCoordinator();
-
-                Toast.makeText(getActivity(),"Contact "+message+" for any Queries",Toast.LENGTH_SHORT).show();
-                Fragment fragment;
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                fragment = new event_coordinator_fragment();
-                ft.replace(R.id.main, fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
-    }
-
-    private void displayList(View view) {
-        ArrayAdapter<events_list_adapter> adapter = new myEventListAdapter();
-        ListView list = (ListView)view.findViewById(R.id.all_events_list1);
-        list.setAdapter(adapter);
-    }
-
-    private class myEventListAdapter extends ArrayAdapter<events_list_adapter> {
-
-        myEventListAdapter() {
-            super(getActivity(), R.layout.event_list_fragment_item, event_list);
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            if (itemView == null) {
-                itemView = getActivity().getLayoutInflater().inflate(R.layout.event_list_fragment_item, parent, false);
-            }
-            events_list_adapter current = event_list.get(position);
-
-            TextView name = (TextView) itemView.findViewById(R.id.event_eventName);
-            name.setText(current.getEventName());
-            TextView coor = (TextView) itemView.findViewById(R.id.event_coordinatorName);
-            coor.setText(current.getCoordinator());
-
-            TextView day = (TextView)itemView.findViewById(R.id.day_number);
-            day.setText("day "+current.getDay());
-
-            return itemView;
-            }
-        }
-
-
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
     }
 
     private void loadJsonFile() {
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/com.justmailtoavi.avinashk.utopia/events.json");
+        File file = new File("/data/data/com.justmailtoavi.avinashk.utopia/winner.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -177,13 +127,13 @@ public class events_list_fragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray eventJson = parent.getJSONArray("event_list");
+                JSONArray eventJson = parent.getJSONArray("winner_list");
 
-                for (int i = 0; i < eventJson.length(); i++) {
+                for (int i = 0;i<eventJson.length();i++){
                     JSONObject child = eventJson.getJSONObject(i);
-                    event_list.add(new events_list_adapter(child.getString("event_name"), child.getString("event_coordinator"), child.getInt("event_day")));
+                    winner_adapterList.add(new winner_adapter(child.getString("event_name"),child.getString("event_winner"),child.getString("event_team")));
                 }
-                displayList(view);
+                displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -191,8 +141,7 @@ public class events_list_fragment extends Fragment {
     }
 
 
-
-    public class EventVersionFile extends AsyncTask<String, String, String> {
+    public class WinnerVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
         BufferedReader reader;
 
@@ -222,11 +171,11 @@ public class events_list_fragment extends Fragment {
             super.onPostExecute(s);
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONObject news_version = parent.getJSONObject("event_version");
+                JSONObject news_version = parent.getJSONObject("winner_version");
 
                 serverVersion = news_version.getInt("version");
 
-                SharedPreferences preferences = getActivity().getSharedPreferences("event_version", Context.MODE_PRIVATE);
+                SharedPreferences preferences = getSharedPreferences("winner_version", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putInt("version", serverVersion);
                 editor.apply();
@@ -234,19 +183,24 @@ public class events_list_fragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (localVersion != serverVersion) {
-                new eventFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/events.json");
+            if (localVersion != serverVersion){
+                new winnerFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/winner.json");
             }
             else{
-                Toast.makeText(getActivity(),"Events List is up to date!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(),"Winner's List is up to date!",Toast.LENGTH_SHORT).show();
                 mWaveSwipeRefreshLayout.setRefreshing(false);
             }
+
         }
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
 
 
-    public class eventFile extends AsyncTask<String, String, String> {
+    public class winnerFile extends AsyncTask<String, String, String> {
 
         HttpURLConnection connection;
         BufferedReader reader;
@@ -281,28 +235,66 @@ public class events_list_fragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                JSONObject parent = new JSONObject(s);
                 mWaveSwipeRefreshLayout.setRefreshing(false);
-                JSONArray eventJson = parent.getJSONArray("event_list");
-
+                JSONObject parent = new JSONObject(s);
+                JSONArray eventJson = parent.getJSONArray("winner_list");
                 for (int i = 0;i<eventJson.length();i++){
                     JSONObject child = eventJson.getJSONObject(i);
-                    event_list.add(new events_list_adapter(child.getString("event_name"),child.getString("event_coordinator"),child.getInt("event_day")));
+                    winner_adapterList.add(new winner_adapter(child.getString("event_name"),child.getString("event_winner"),child.getString("event_team")));
                 }
-                displayList(view);
+                displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
-
     }
+
+
+    private void displayList() {
+        ArrayAdapter<winner_adapter> adapter = new myWinnerListAdapter();
+        ListView list = (ListView)findViewById(R.id.winner_list);
+        list.setAdapter(adapter);
+    }
+
+
+    private class myWinnerListAdapter extends ArrayAdapter<winner_adapter> {
+
+        myWinnerListAdapter() {
+            super(getApplication(), R.layout.winner_list_item, winner_adapterList);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = convertView;
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.winner_list_item, parent, false);
+            }
+            winner_adapter current = winner_adapterList.get(position);
+
+            TextView w_event = (TextView)itemView.findViewById(R.id.w_event);
+            w_event.setText(current.getEventName());
+
+            TextView w_name = (TextView)itemView.findViewById(R.id.w_name);
+            w_name.setText(current.getWinnerName());
+
+            TextView w_team = (TextView)itemView.findViewById(R.id.w_team);
+            w_team.setText(current.getTeamName());
+
+            return itemView;
+        }
+    }
+
+
+
+
 
 
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/com.justmailtoavi.avinashk.utopia/events.json");
+            File path = new File("/data/data/com.justmailtoavi.avinashk.utopia/winner.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 
@@ -316,5 +308,22 @@ public class events_list_fragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(winner_list.this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(winner_list.this,MainActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

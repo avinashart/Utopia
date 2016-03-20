@@ -18,11 +18,16 @@ android {
         }
     }
 }
-repositories {
-    jcenter()
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
 }
 
+
 dependencies {
+    compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.github.olegosipenko:pttextview:1.0.0'
 }

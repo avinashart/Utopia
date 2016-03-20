@@ -30,7 +30,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:paddingBottom="30dp"
+        android:paddingBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -52,7 +52,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
-                android:text="All participants must be present 5 minutes before the event starts and must register their names/ team names (if nescassary). "
+                android:text="All participants must be present 10-15 minutes before the event starts and must register their names/ team names (if necessary). "
                 android:layout_height="wrap_content"
                 app:textWeight="bold"
                 />
@@ -130,7 +130,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
-                android:text="No OUTSIDERS will be entertained, Coordinators will have the complete authority to dismiss a group in in case found so."
+                android:text="No OUTSIDER'S participation will be entertained, Coordinators will have the complete authority to dismiss a group (for that event) if in case found so."
                 android:layout_height="wrap_content"
                 app:textWeight="bold"
                 />
@@ -209,7 +209,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
-                android:text="Coordinators decision shall be FINAL. And any severe arguments with the coordinators may lead to team-points deduction."
+                android:text="Coordinators decision shall be FINAL. Scenarios where the coordinator's decision is not satisfying, you can always approach the General Coordination Team."
                 android:layout_height="wrap_content"
                 app:textWeight="bold"
                 />
@@ -236,7 +236,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
-                android:text="Hostel ID Cards must be produced on demand of the Coordinators. Misbehaving with the coordinators or with other team members shall not be Entertained. "
+                android:text="Hostel ID Cards must be produced on demand of the Coordinators. Misbehaving with the coordinators or with other Team-members shall not be Entertained. "
                 android:layout_height="wrap_content"
                 app:textWeight="bold"
                 />

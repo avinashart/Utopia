@@ -22,6 +22,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +36,8 @@ public class MainActivity extends AppCompatActivity
             fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment;
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                fragment = new gallery_fragment();
-                ft.replace(R.id.main,fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.addToBackStack(null);
-                ft.commit();
+             Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity
         ft.addToBackStack(null);
         ft.commit();
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -60,8 +57,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
-    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
 
@@ -69,11 +67,13 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
         }
         doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "double tap BACK to exit app!", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -114,47 +114,52 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
         if (id == R.id.events_list) {
+
             fragment = new events_list_fragment();
             ft.replace(R.id.main,fragment,null);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
         } else if (id == R.id.team_info) {
+
             Intent intent = new Intent(MainActivity.this,teams_info.class);
             startActivity(intent);
-        } else if (id == R.id.gallery) {
-            fragment = new gallery_fragment();
-            ft.replace(R.id.main,fragment);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
+        } else if (id == R.id.winner) {
+
+            Intent intent = new Intent(MainActivity.this,winner_list.class);
+            startActivity(intent);
+
         } else if (id == R.id.event_coordinator) {
+
             fragment = new event_coordinator_fragment();
             ft.replace(R.id.main,fragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
+
         } else if (id == R.id.feedback) {
+
             Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "justmailtoavi@gmail.com"));
             intent.putExtra(Intent.EXTRA_SUBJECT, "Utopia Feedback System");
             startActivity(intent);
+
         } else if (id == R.id.t_shirt) {
 
             Intent intent = new Intent(MainActivity.this,t_shirt.class);
             startActivity(intent);
 
         }else if( id == R.id.core_team){
+
             fragment = new core_team_fragment();
             ft.replace(R.id.main,fragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
-        }else if(id == R.id.home){
-            Intent intent = new Intent(MainActivity.this,MainActivity.class);
-            startActivity(intent);
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
 }
