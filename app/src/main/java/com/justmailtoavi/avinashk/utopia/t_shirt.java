@@ -63,4 +63,12 @@ public class t_shirt extends AppCompatActivity {
         mDemoSlider.setDuration(7000);
     }
 
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(t_shirt.this,MainActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }

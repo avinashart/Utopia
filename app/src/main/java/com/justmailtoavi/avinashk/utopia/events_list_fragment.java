@@ -61,14 +61,13 @@ public class events_list_fragment extends Fragment {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
-
+        loadJsonFile();
         if (isNetworkConnected()) {
             SharedPreferences preferences = getActivity().getSharedPreferences("event_version", Context.MODE_PRIVATE);
             localVersion = preferences.getInt("version", 0);
            new EventVersionFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/events_version.json");
         } else {
             Toast.makeText(getActivity(),"No Internet Connection!",Toast.LENGTH_SHORT).show();
-            loadJsonFile();
         }
         handleClicks();
 
@@ -122,6 +121,9 @@ public class events_list_fragment extends Fragment {
             TextView coor = (TextView) itemView.findViewById(R.id.event_coordinatorName);
             coor.setText(current.getCoordinator());
 
+            TextView day = (TextView)itemView.findViewById(R.id.day_number);
+            day.setText("day "+current.getDay());
+
             return itemView;
             }
         }
@@ -159,20 +161,18 @@ public class events_list_fragment extends Fragment {
                         }
                 }
 
-                JSONObject parent;
-                try {
-                    parent = new JSONObject(ret);
-                    JSONArray newsArray = parent.getJSONArray("event_list");
-                    for (int i = 0; i < newsArray.length(); i++) {
-                        JSONObject child = newsArray.getJSONObject(i);
-                        event_list.add(new events_list_adapter(
-                                child.getString("event_name"), child.getString("event_coordinator"),child.getInt("event_day")));
+            try {
+                JSONObject parent = new JSONObject(ret);
+                JSONArray eventJson = parent.getJSONArray("event_list");
 
-                    }
-                    displayList(view);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                for (int i = 0;i<eventJson.length();i++){
+                    JSONObject child = eventJson.getJSONObject(i);
+                    event_list.add(new events_list_adapter(child.getString("event_name"),child.getString("event_coordinator"),child.getInt("event_day")));
                 }
+                displayList(view);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }else {
 
 

@@ -4,44 +4,50 @@
     android:padding="10dp"
     >
 
-
+        <pttextview.widget.PTTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:text="Event"
+            android:layout_height="wrap_content"
+            app:textWeight="bold"
+            android:textStyle="bold"
+            />
+        <pttextview.widget.PTTextView
+            android:paddingStart="100dp"
+            android:textStyle="bold"
+            android:id="@+id/event_eventName"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:text="Example"
+            android:layout_height="wrap_content"
+            app:textWeight="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/event_eventName"
+            android:text="Coordinator"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="100dp"
+            android:id="@+id/event_coordinatorName"
+            android:layout_below="@+id/event_eventName"
+            android:text=""
+            />
     <pttextview.widget.PTTextView
+        android:layout_marginStart="250dp"
+        android:textStyle="bold"
+        android:id="@+id/day_number"
+        android:textSize="20sp"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
-        android:text="Event"
         android:layout_height="wrap_content"
         app:textWeight="bold"
-        android:textStyle="bold"
+        android:text="day "
         />
-
-    <pttextview.widget.PTTextView
-        android:paddingStart="150dp"
-        android:textStyle="bold"
-        android:id="@+id/event_eventName"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:text="Example"
-        android:layout_height="wrap_content"
-        app:textWeight="bold"
-        />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/event_eventName"
-        android:text="Coordinator"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="150dp"
-        android:id="@+id/event_coordinatorName"
-        android:layout_below="@+id/event_eventName"
-        android:text=""
-        />
-
 </RelativeLayout>
