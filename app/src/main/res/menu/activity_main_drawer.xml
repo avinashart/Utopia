@@ -13,6 +13,11 @@
             android:icon="@drawable/team"
             android:title="About Teams" />
         <item
+            android:id="@+id/gallery"
+            android:icon="@drawable/gallery"
+            android:title="Image Gallery" />
+
+        <item
             android:id="@+id/winner"
             android:icon="@drawable/winner"
             android:title="Event Winners" />
@@ -28,7 +33,6 @@
             android:id="@+id/core_team"
             android:icon="@drawable/core_team"
             android:title="Core Team" />
-
 
     </group>
 

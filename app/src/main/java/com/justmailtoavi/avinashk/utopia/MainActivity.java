@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         fragment = new container();
-        ft.replace(R.id.main, fragment);
+        ft.replace(R.id.main,fragment,null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();
@@ -116,14 +118,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.events_list) {
 
             fragment = new events_list_fragment();
-            ft.replace(R.id.main,fragment,null);
+            ft.replace(R.id.main,fragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
+
         } else if (id == R.id.team_info) {
 
             Intent intent = new Intent(MainActivity.this,teams_info.class);
             startActivity(intent);
+
         } else if (id == R.id.winner) {
 
             Intent intent = new Intent(MainActivity.this,winner_list.class);
@@ -156,6 +160,9 @@ public class MainActivity extends AppCompatActivity
             ft.addToBackStack(null);
             ft.commit();
 
+        }else if (id == R.id.gallery){
+            Intent intent = new Intent(MainActivity.this,gallery.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

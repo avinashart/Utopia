@@ -4,7 +4,6 @@
     android:background="@drawable/b2"
     >
 
-
     <TextView
         android:id="@+id/d1"
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/mainActivitySlider"
         android:layout_width="match_parent"
-        android:background="#7cb342"
+        android:background="#ff7cb342"
         android:layout_height="350dp"
         />
     <TextView

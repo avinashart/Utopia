@@ -23,7 +23,6 @@ public class container extends Fragment {
          view = inflater.inflate(R.layout.container, container, false);
 
 
-
                 SliderLayout mDemoSlider = (SliderLayout) view.findViewById(R.id.mainActivitySlider);
                 final HashMap<String,Integer> file_maps = new HashMap<>();
                 file_maps.put("Vijayanagar Vikings",R.drawable.vijaynagar);
