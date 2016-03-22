@@ -18,13 +18,13 @@
         >
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/avi"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/developer"
             app:civ_border_color="#8b8686"
             app:civ_border_width="4dp"
             app:civ_shadow="true"
-            app:civ_shadow_radius="10"
+            app:civ_shadow_radius="8"
             app:civ_shadow_color="#aeea00"/>
 
         <LinearLayout
@@ -122,12 +122,6 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:paddingTop="20dp"
-            android:layout_width="wrap_content"
-            android:text="Rishab Tripati 6th Semester ECE Dept"
-            android:layout_height="wrap_content" />
-        
         <TextView
             android:paddingTop="20dp"
             android:layout_width="wrap_content"

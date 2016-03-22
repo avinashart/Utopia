@@ -30,6 +30,4 @@
         android:src="@drawable/home" />
 
     <include layout="@layout/content_about_dev" />
-
-
 </android.support.design.widget.CoordinatorLayout>

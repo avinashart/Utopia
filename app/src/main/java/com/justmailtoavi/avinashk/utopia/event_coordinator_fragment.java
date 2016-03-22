@@ -27,22 +27,13 @@ public class event_coordinator_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.event_coordinator_fragment,container,false);
-
-
         generateList();
         displayList(view);
         handleClicks(view);
-
         return view;
     }
-
-
     private void generateList() {
 
-
-
-
-        //Room 107
         coordinator_list.add(new coordinators_adapter("M Vinay Sagar", "9008547253"));
         coordinator_list.add(new coordinators_adapter("Sujith SDV", "9731471041"));
         coordinator_list.add(new coordinators_adapter("Karan Sowdri", "9844494343"));
@@ -242,6 +233,4 @@ public class event_coordinator_fragment extends Fragment {
             }
         });
     }
-
-
 }

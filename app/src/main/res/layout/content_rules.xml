@@ -182,7 +182,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:textSize="15sp"
-                android:text="Coordinaters have the right to dismiss any participant if in case found Voilating the rules."
+                android:text="Coordinaters have the right to dismiss any participant if in case found Violating the rules."
                 android:layout_height="wrap_content"
                 app:textWeight="bold"
                 />
@@ -246,11 +246,4 @@
     </RelativeLayout>
 
 </ScrollView>
-
-
-
-
-
-
-
 </RelativeLayout>

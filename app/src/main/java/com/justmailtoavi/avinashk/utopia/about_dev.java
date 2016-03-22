@@ -17,15 +17,10 @@ public class about_dev extends AppCompatActivity {
         setContentView(R.layout.activity_about_dev);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabd);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,9 +29,7 @@ public class about_dev extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -66,8 +59,6 @@ public class about_dev extends AppCompatActivity {
             startActivity(i);
         }
     }
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

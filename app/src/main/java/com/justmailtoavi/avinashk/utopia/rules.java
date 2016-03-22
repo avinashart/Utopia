@@ -35,7 +35,6 @@ public class rules extends AppCompatActivity {
 
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

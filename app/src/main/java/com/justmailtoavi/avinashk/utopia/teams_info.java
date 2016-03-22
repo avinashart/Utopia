@@ -52,5 +52,4 @@ public class teams_info extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

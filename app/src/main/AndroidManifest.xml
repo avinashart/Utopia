@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -21,6 +25,8 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".SplasherActivity"
             android:label="@string/title_activity_splasher"
@@ -31,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".about_dev"
             android:label="@string/title_activity_about_dev"
@@ -50,15 +57,11 @@
         <activity
             android:name=".winner_list"
             android:label="@string/title_activity_winner_list"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".gallery"
             android:label="Gallery"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

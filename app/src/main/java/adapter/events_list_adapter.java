@@ -4,18 +4,14 @@ package adapter;
 public class events_list_adapter {
 
     String eventName,coordinator;
-    int day;
-
-
-    public events_list_adapter(String eventName, String coordinator,int day) {
+    String day;
+    public events_list_adapter(String eventName, String coordinator,String day) {
         this.day = day;
         this.eventName = eventName;
         this.coordinator = coordinator;
 
     }
-
-
-    public void setDay(int day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
@@ -29,7 +25,7 @@ public class events_list_adapter {
 
 
 
-    public int getDay() {
+    public String getDay() {
         return day;
     }
 
@@ -40,6 +36,4 @@ public class events_list_adapter {
     public String getCoordinator() {
         return coordinator;
     }
-
-
 }

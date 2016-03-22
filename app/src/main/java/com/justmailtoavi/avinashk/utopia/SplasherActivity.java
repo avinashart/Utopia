@@ -23,7 +23,6 @@ public class SplasherActivity extends AppCompatActivity {
         }, 1200);
     }
 
-
     @Override
     public void onBackPressed() {
         finish();

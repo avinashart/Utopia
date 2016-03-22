@@ -50,10 +50,14 @@ public class events_list_fragment extends Fragment {
     static int serverVersion, localVersion;
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.events_list_fragment,container,false);
+
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
 
         //Ask for permissions Android M
@@ -136,13 +140,11 @@ public class events_list_fragment extends Fragment {
             coor.setText(current.getCoordinator());
 
             TextView day = (TextView)itemView.findViewById(R.id.day_number);
-            day.setText("day "+current.getDay());
+            day.setText(current.getDay());
 
             return itemView;
             }
         }
-
-
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -181,7 +183,7 @@ public class events_list_fragment extends Fragment {
 
                 for (int i = 0; i < eventJson.length(); i++) {
                     JSONObject child = eventJson.getJSONObject(i);
-                    event_list.add(new events_list_adapter(child.getString("event_name"), child.getString("event_coordinator"), child.getInt("event_day")));
+                    event_list.add(new events_list_adapter(child.getString("event_name"), child.getString("event_coordinator"), child.getString("event_day")));
                 }
                 displayList(view);
             } catch (JSONException e) {
@@ -287,7 +289,7 @@ public class events_list_fragment extends Fragment {
 
                 for (int i = 0;i<eventJson.length();i++){
                     JSONObject child = eventJson.getJSONObject(i);
-                    event_list.add(new events_list_adapter(child.getString("event_name"),child.getString("event_coordinator"),child.getInt("event_day")));
+                    event_list.add(new events_list_adapter(child.getString("event_name"),child.getString("event_coordinator"),child.getString("event_day")));
                 }
                 displayList(view);
             } catch (JSONException e) {
@@ -297,7 +299,6 @@ public class events_list_fragment extends Fragment {
         }
 
     }
-
 
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;

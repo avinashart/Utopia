@@ -27,11 +27,12 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/ccText"
         android:id="@+id/main_swipe">
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/all_events_list1"
-        android:layout_centerHorizontal="true" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/all_events_list1"
+            android:layout_centerHorizontal="true" />
 
     </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
 

@@ -32,10 +32,7 @@
               android:text="Number"
               android:id="@+id/core_number_item"
               />
-
-
       </LinearLayout>
-
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_width="10dp"

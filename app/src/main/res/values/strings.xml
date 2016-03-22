@@ -15,5 +15,6 @@
     <string name="title_activity_t_shirt">T-Shirt</string>
     <string name="title_activity_rules">Rules And Regulations</string>
     <string name="title_activity_winner_list">Winners</string>
+    <string name="title_activity_events">events</string>
 
 </resources>

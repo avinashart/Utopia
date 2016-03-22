@@ -42,8 +42,8 @@ public class t_shirt extends AppCompatActivity {
         SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.slide2);
 
         final HashMap<String,Integer> file_maps = new HashMap<>();
-        file_maps.put("Upotia T-Shirt FrontView",R.drawable.shirt2);
-        file_maps.put("Upotia T-Shirt RearView ",R.drawable.backside);
+        file_maps.put("Upotia T-Shirt FrontView",R.drawable.shirt_front_image);
+        file_maps.put("Upotia T-Shirt RearView ",R.drawable.shirt_rear_image);
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);
@@ -60,11 +60,10 @@ public class t_shirt extends AppCompatActivity {
 
             mDemoSlider.addSlider(textSliderView);
         }
-
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(7000);
+        mDemoSlider.setDuration(6000);
     }
 
     @Override
