@@ -27,7 +27,6 @@ public class winner_adapter {
     }
 
     public String getEventName() {
-
         return eventName;
     }
 

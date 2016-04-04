@@ -78,9 +78,7 @@ public class t_shirt extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        finish();
 
-        Intent intent = new Intent(t_shirt.this,MainActivity.class);
-        startActivity(intent);
-        super.onBackPressed();
     }
 }

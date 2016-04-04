@@ -37,10 +37,7 @@ public class teams_info extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        Intent intent = new Intent(teams_info.this,MainActivity.class);
-        startActivity(intent);
-        super.onBackPressed();
+        finish();
     }
 
     @Override

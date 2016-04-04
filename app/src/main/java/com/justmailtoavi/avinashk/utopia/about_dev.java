@@ -15,6 +15,7 @@ public class about_dev extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_dev);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
@@ -61,8 +62,6 @@ public class about_dev extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(about_dev.this,MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 }

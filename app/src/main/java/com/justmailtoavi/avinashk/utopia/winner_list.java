@@ -307,8 +307,7 @@ public class winner_list extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(winner_list.this,MainActivity.class);
-        startActivity(intent);
+      finish();
     }
 
     @Override

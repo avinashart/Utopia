@@ -1,12 +1,16 @@
 package com.justmailtoavi.avinashk.utopia;
 
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,18 +33,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import adapter.alarmReceiver;
 
 
 public class container extends Fragment {
 
-    static int serverVersionWinner,localVersionWinner,serverVersionGallery,localVersionGallery;
+    static int serverVersionWinner,localVersionWinner,serverVersionGallery,localVersionGallery,localGeneralVersion,serverGeneralVersion;
     View view;
 
-    NotificationCompat.Builder winner_notification,gallery_notification;
-    private static final int unique_winner = 909,unique_gallery = 123;
+    NotificationCompat.Builder winner_notification,gallery_notification,general_notification;
+    private static final int unique_winner = 909,unique_gallery = 123,unique_general = 100;
 
+    Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
     @Nullable
     @Override
@@ -55,6 +62,8 @@ public class container extends Fragment {
         gallery_notification.setAutoCancel(true);
 
 
+        general_notification =  new NotificationCompat.Builder(getActivity());
+        general_notification.setAutoCancel(true);
 
 
                 SliderLayout mDemoSlider = (SliderLayout) view.findViewById(R.id.mainActivitySlider);
@@ -84,26 +93,40 @@ public class container extends Fragment {
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                 mDemoSlider.setDuration(6000);
-
+        hostBroadcast();
         if (isNetworkConnected()){
             checkForWinnerListChanges();
             checkForgalleryListChanges();
+            checkForGeneralNotifications();
         }
-
         return view;
     }
 
+    private void hostBroadcast() {
+        long alertCheck = new GregorianCalendar().getTimeInMillis()+1000*60*3;
+        Intent alertIntent = new Intent(getActivity(), alarmReceiver.class);
+        AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alertCheck, 1000 * 60, PendingIntent.getBroadcast(getActivity(), 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+    }
+
+    private void checkForGeneralNotifications() {
+        SharedPreferences preferences = (getActivity()).getSharedPreferences("general_version", Context.MODE_PRIVATE);
+        localGeneralVersion = preferences.getInt("version", 0);
+        new checkGeneralVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/general_version.json");
+
+    }
+
     private void checkForWinnerListChanges() {
-        new checkWinnerVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/winner_version.json");
         SharedPreferences preferences = (getActivity()).getSharedPreferences("winner_version", Context.MODE_PRIVATE);
         localVersionWinner = preferences.getInt("version", 0);
+        new checkWinnerVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/winner_version.json");
     }
 
 
     private void checkForgalleryListChanges() {
-        new CheckGalleryVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/gallery_version.json");
-        SharedPreferences preferences = getActivity().getSharedPreferences("gallery_version", Context.MODE_PRIVATE);
+        SharedPreferences preferences = (getActivity()).getSharedPreferences("gallery_version", Context.MODE_PRIVATE);
         localVersionGallery = preferences.getInt("version", 0);
+        new CheckGalleryVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/gallery_version.json");
     }
 
     private boolean isNetworkConnected() {
@@ -152,10 +175,18 @@ public class container extends Fragment {
                     winner_notification.setWhen(System.currentTimeMillis());
                     winner_notification.setContentTitle("UTOPIA 2016");
                     winner_notification.setColor(0xff66BB6A);
+                    winner_notification.setSound(sound);
                     winner_notification.setContentText("Winner's List updated");
 
                     Intent intent = new Intent(getActivity(),winner_list.class);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+                    stackBuilder.addParentStack(MainActivity.class);
+                    stackBuilder.addNextIntent(intent);
+
+
+                    PendingIntent pendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
                     winner_notification.setContentIntent(pendingIntent);
 
                     NotificationManager nm = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -208,13 +239,18 @@ public class container extends Fragment {
                     gallery_notification.setTicker("New Photos in Gallery");
                     gallery_notification.setWhen(System.currentTimeMillis());
                     gallery_notification.setColor(0xff66BB6A);
+                    gallery_notification.setSound(sound);
                     gallery_notification.setContentTitle("UTOPIA 2016");
                     gallery_notification.setContentText("New Images are available in Gallery");
 
                     Intent intent = new Intent(getActivity(),gallery.class);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                    gallery_notification.setContentIntent(pendingIntent);
 
+                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+                    stackBuilder.addParentStack(MainActivity.class);
+                    stackBuilder.addNextIntent(intent);
+
+                    PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                    gallery_notification.setContentIntent(pendingIntent);
                     NotificationManager nm = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
                     nm.notify(unique_gallery,gallery_notification.build());
                 }
@@ -226,6 +262,114 @@ public class container extends Fragment {
         }
 
     }
+
+
+    public class checkGeneralVersion extends AsyncTask<String, String, String> {
+        HttpURLConnection connection;
+        BufferedReader reader;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                return builder.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject parent = new JSONObject(s);
+                JSONObject news_version = parent.getJSONObject("general_version");
+                serverGeneralVersion = news_version.getInt("version");
+
+
+                if (localGeneralVersion != serverGeneralVersion){
+                    SharedPreferences preferences = getActivity().getSharedPreferences("general_version", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("version", serverGeneralVersion);
+                    editor.apply();
+                    new FetchGeneralFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/general.json");
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public class FetchGeneralFile extends AsyncTask<String, String, String> {
+        HttpURLConnection connection;
+        BufferedReader reader;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                return builder.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                JSONObject parent = new JSONObject(s);
+                JSONObject news_version = parent.getJSONObject("general");
+                String message = news_version.getString("message");
+
+                general_notification.setSmallIcon(R.drawable.notification);
+                general_notification.setWhen(System.currentTimeMillis());
+                general_notification.setColor(0xff66BB6A);
+                general_notification.setSound(sound);
+                general_notification.setContentTitle("UTOPIA 2016");
+                general_notification.setContentText(message);
+
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                general_notification.setContentIntent(pendingIntent);
+
+                NotificationManager nm = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                nm.notify(unique_general, general_notification.build());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+
+
 
 
 }
