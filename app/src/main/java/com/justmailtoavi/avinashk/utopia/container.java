@@ -1,6 +1,5 @@
 package com.justmailtoavi.avinashk.utopia;
 
-import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -33,10 +32,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 
-import adapter.alarmReceiver;
 
 
 public class container extends Fragment {
@@ -93,28 +90,15 @@ public class container extends Fragment {
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                 mDemoSlider.setDuration(6000);
-        hostBroadcast();
+
         if (isNetworkConnected()){
             checkForWinnerListChanges();
             checkForgalleryListChanges();
-            checkForGeneralNotifications();
         }
         return view;
     }
 
-    private void hostBroadcast() {
-        long alertCheck = new GregorianCalendar().getTimeInMillis()+1000*60*3;
-        Intent alertIntent = new Intent(getActivity(), alarmReceiver.class);
-        AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alertCheck, 1000 * 60, PendingIntent.getBroadcast(getActivity(), 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-    }
 
-    private void checkForGeneralNotifications() {
-        SharedPreferences preferences = (getActivity()).getSharedPreferences("general_version", Context.MODE_PRIVATE);
-        localGeneralVersion = preferences.getInt("version", 0);
-        new checkGeneralVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/general_version.json");
-
-    }
 
     private void checkForWinnerListChanges() {
         SharedPreferences preferences = (getActivity()).getSharedPreferences("winner_version", Context.MODE_PRIVATE);
@@ -264,53 +248,9 @@ public class container extends Fragment {
     }
 
 
-    public class checkGeneralVersion extends AsyncTask<String, String, String> {
-        HttpURLConnection connection;
-        BufferedReader reader;
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-                StringBuilder builder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    builder.append(line);
-                }
-                return builder.toString();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
 
 
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            try {
-                JSONObject parent = new JSONObject(s);
-                JSONObject news_version = parent.getJSONObject("general_version");
-                serverGeneralVersion = news_version.getInt("version");
-
-
-                if (localGeneralVersion != serverGeneralVersion){
-                    SharedPreferences preferences = getActivity().getSharedPreferences("general_version", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("version", serverGeneralVersion);
-                    editor.apply();
-                    new FetchGeneralFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfa3ZMM3E5UUhQU0E/general.json");
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public class FetchGeneralFile extends AsyncTask<String, String, String> {
         HttpURLConnection connection;

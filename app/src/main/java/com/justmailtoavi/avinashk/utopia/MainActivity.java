@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity
             startMain.addCategory(Intent.CATEGORY_HOME);
             startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(startMain);
+            finish();
         }
         doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "double tap BACK to exit app!", Toast.LENGTH_SHORT).show();
@@ -135,11 +136,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.event_coordinator) {
 
-            fragment = new event_coordinator_fragment();
-            ft.replace(R.id.main,fragment);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
 
         } else if (id == R.id.feedback) {
 
@@ -154,11 +150,6 @@ public class MainActivity extends AppCompatActivity
 
         }else if( id == R.id.core_team){
 
-            fragment = new core_team_fragment();
-            ft.replace(R.id.main,fragment);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.addToBackStack(null);
-            ft.commit();
 
         }else if (id == R.id.gallery){
             Intent intent = new Intent(MainActivity.this,gallery.class);

@@ -2,7 +2,6 @@ package com.justmailtoavi.avinashk.utopia;
 
 import android.Manifest;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -100,15 +99,8 @@ public class events_list_fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 events_list_adapter click = event_list.get(position);
                 String message = click.getCoordinator();
-
                 Toast.makeText(getActivity(),"Contact "+message+" for any Queries",Toast.LENGTH_SHORT).show();
-                Fragment fragment;
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                fragment = new event_coordinator_fragment();
-                ft.replace(R.id.main, fragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.addToBackStack(null);
-                ft.commit();
+
             }
         });
     }
